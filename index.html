@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas mechanics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Вариант задания:</h1>
+    <br>
+    <div class="text_condition">
+        <p>R = 1.5*r</p>
+        <p>h = 0.5*r</p>
+        <p>Малая окружность будет находиться внутри большой</p>
+    </div>
+    <br>
+
+    <h1>Результат:</h1>
+    <div class="container">
+        <canvas></canvas>
+    </div>
+    <script src="script.js"></script>
+    <br>
+
+    <h1>
+        HTML развертка:
+    </h1>
+
+    <br>
+
+    <div class="code_html">
+        <pre class="hljs"
+            style="display: block; overflow-x: auto; background: rgb(25, 23, 28); color: rgb(139, 135, 146); padding: 0.5em;"><span class="xml"><span class="hljs-meta" style="color: rgb(170, 87, 60);">&lt;!DOCTYPE html&gt;</span>
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"ru"</span>&gt;</span>
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">head</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"UTF-8"</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">title</span>&gt;</span>Canvas mechanics<span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">title</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"style.css"</span>&gt;</span>
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">head</span>&gt;</span>
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">body</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"container"</span>&gt;</span>
+                    <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">canvas</span>&gt;</span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">canvas</span>&gt;</span>
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">div</span>&gt;</span>
+            
+                <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;<span class="hljs-name" style="color: rgb(190, 70, 120);">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string" style="color: rgb(42, 146, 146);">"script.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">script</span>&gt;</span>
+            
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">body</span>&gt;</span>
+            <span class="hljs-tag" style="color: rgb(190, 70, 120);">&lt;/<span class="hljs-name" style="color: rgb(190, 70, 120);">html</span>&gt;</span></span></pre>
+    </div>
+    <br>
+    <h1>Код на JS: </h1>
+
+    <div class="code_js">
+        <pre class="hljs"
+            style="display: block; overflow-x: auto; background: rgb(25, 23, 28); color: rgb(139, 135, 146); padding: 0.5em;">const canvas = document.querySelector(<span class="hljs-string" style="color: rgb(42, 146, 146);">"canvas"</span>);
+            const <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span> = canvas.getContext(<span class="hljs-string" style="color: rgb(42, 146, 146);">"2d"</span>);
+            
+            canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> =<span class="hljs-number" style="color: rgb(170, 87, 60);">800</span>;
+            canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> =<span class="hljs-number" style="color: rgb(170, 87, 60);">600</span>;
+            
+            const rm = <span class="hljs-number" style="color: rgb(170, 87, 60);">100</span>;
+            const Rb = <span class="hljs-number" style="color: rgb(170, 87, 60);">1.5</span> * rm;
+            const h = <span class="hljs-number" style="color: rgb(170, 87, 60);">0.5</span> * rm;
+            
+            //Построим статичную картинку
+            
+            // Большая окружность
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, Rb, <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+            // //O O1
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.moveTo(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.lineTo(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> + Rb - rm, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+            // //Малая окружность
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> + Rb - rm, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, rm, <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+            // //O1 M
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.moveTo(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> + Rb - rm, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.lineTo(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> + Rb- rm, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> - h);
+            // <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+            // Приступим к ее анимированию
+            requestAnimationFrame(tick);
+            <span class="hljs-built_in" style="color: rgb(170, 87, 60);">let</span> pTimestamp = <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>;
+            <span class="hljs-built_in" style="color: rgb(170, 87, 60);">let</span> angle = <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>;
+            <span class="hljs-built_in" style="color: rgb(170, 87, 60);">let</span> angle2 = <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>;
+            
+            function tick(timestamp){
+                requestAnimationFrame(tick);
+                
+                const <span class="hljs-built_in" style="color: rgb(170, 87, 60);">diff</span> = timestamp - pTimestamp;
+                pTimestamp = timestamp;
+            
+                angle += Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">0.01</span>;
+                angle2 += Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">0.02</span>;
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.clearRect(<span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span>);
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.strokeStyle = <span class="hljs-string" style="color: rgb(42, 146, 146);">"black"</span>;
+                
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, Rb, <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>, Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle), 
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle), 
+                    rm,
+                    <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>,
+                    Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle), 
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle), 
+                    <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>,
+                    <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>,
+                    Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.moveTo(canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>, canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>);
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.lineTo(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle), 
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle),
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.moveTo(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle), 
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle),
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.lineTo(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle) + h* Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle2),
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle) + h* Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle2)
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.strokeStyle = <span class="hljs-string" style="color: rgb(42, 146, 146);">"green"</span>;
+            
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.beginPath();
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.arc(
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">width</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span> ) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle) + h* Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">cos</span>(angle2),
+                    (canvas.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">height</span> / <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>) + (Rb-rm) * Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle) + h* Math.<span class="hljs-built_in" style="color: rgb(170, 87, 60);">sin</span>(angle2),
+                    <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>,
+                    <span class="hljs-number" style="color: rgb(170, 87, 60);">0</span>,
+                    Math.PI * <span class="hljs-number" style="color: rgb(170, 87, 60);">2</span>
+                );
+                <span class="hljs-built_in" style="color: rgb(170, 87, 60);">context</span>.stroke();
+            }</pre>
+    </div>
+</body>
+
+</html>
