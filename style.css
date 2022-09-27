@@ -4,10 +4,18 @@ body{
 }
 
 .container{
-    display:flex;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
+}
+
+#canvas{
+    position: absolute;
+}
+
+#canvas2{
+    position: absolute;
 }
 
 h1{
@@ -18,9 +26,13 @@ h1{
 .text_condition{
     text-align: center;
     justify-content: center;
-    font-size: large;;
+    font-size: large;
 }
 
 .code_html{
+    font-size: 15px;
+}
 
+.code_js{
+    font-size: 15px;
 }
